@@ -1,0 +1,35 @@
+{
+  "name": "formulate",
+  "version": "0.1.0",
+  "description": "Automatic form builder.",
+  "main": "src/index.js",
+  "scripts": {
+    "serve": "vue-cli-service serve",
+    "build": "vue-cli-service build",
+    "commit": "git-cz"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "cz-conventional-changelog": "^3.2.0"
+  },
+  "config": {
+    "commitizen": {
+      "path": "node_modules/cz-conventional-changelog"
+    }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/oxyzhg/formulate.git"
+  },
+  "keywords": [
+    "form",
+    "formulate",
+    "formulation"
+  ],
+  "author": "oxyzhg@163.com",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/oxyzhg/formulate/issues"
+  },
+  "homepage": "https://github.com/oxyzhg/formulate#readme"
+}

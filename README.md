@@ -1,2 +1,3 @@
-# formulate
+# Formulate
+
 :rocket: Automatic form builder.

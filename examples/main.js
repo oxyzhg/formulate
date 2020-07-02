@@ -3,8 +3,7 @@ import ElementUI from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css';
 
 import Formulate from '@formulate';
-
-import App from './App.vue';
+import App from './App';
 
 Vue.use(ElementUI);
 Vue.use(Formulate);

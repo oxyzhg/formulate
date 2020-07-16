@@ -1,16 +1,22 @@
+import { configurableProps } from '../common/constant';
+
 export default {
   props: {
     value: [String, Number, Boolean, Array],
     form: Object,
     options: Array,
     field: Object,
-    fieldKey: String,
-    fieldProps: Object,
+  },
+
+  data() {
+    return {
+      ...configurableProps,
+    };
   },
 
   methods: {
     emitInput(value) {
-      this.$emit('update:value', value);
+      this.$emit('input', value);
     },
   },
 };

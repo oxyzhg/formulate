@@ -1,8 +1,8 @@
-import { isEmpty, isUndefined, assignWith, merge, pick } from 'lodash-es';
+import { isEmpty, isUndefined, assignWith, merge, pick, cloneDeep } from 'lodash-es';
 import { isArray, isObject, hasOwn } from '../shared';
-import { configurableProps, shortProps, fieldShortProps } from './constant';
+import { configurableProps, shortProps } from './constant';
 
-const { KEY, FORMITEM_PROPS, FIELD_PROPS } = configurableProps;
+const { KEY, FORMITEM_PROPS, FIELD_PROPS, COLUMN_PROPS, CHILDREN } = configurableProps;
 
 /**
  * 合并最终表单值对象
@@ -45,24 +45,33 @@ export function parseFieldDataType(type) {
  * 生成标准格式表单配置描述对象
  * @param {object} descriptor 表单配置描述对象
  */
-function formatNormalDescriptor(descriptor) {
+export function formatNormalDescriptor(descriptor) {
   // 校验空值和参数类型
   if (isEmpty(descriptor)) return {};
 
-  const mergeProps = area => {
-    if (isObject(area) && hasOwn(area, KEY)) {
-      area[FORMITEM_PROPS] = merge(area[FORMITEM_PROPS], pick(area, shortProps));
-      area[FIELD_PROPS] = merge(area[FIELD_PROPS], pick(area, fieldShortProps));
+  const localDescriptor = cloneDeep(descriptor);
+
+  const mergeProps = field => {
+    // 存在 KEY 即认为是表单项，否则考虑是否为布局项
+    if (isObject(field) && hasOwn(field, KEY)) {
+      field[FORMITEM_PROPS] = merge(field[FORMITEM_PROPS], pick(field, shortProps.FORM));
+      field[FIELD_PROPS] = merge(field[FIELD_PROPS], pick(field, shortProps.FILED));
+      field[COLUMN_PROPS] = merge(field[COLUMN_PROPS], pick(field, shortProps.COLUMN));
+    } else if (isObject(field) && hasOwn(field, CHILDREN)) {
+      field[COLUMN_PROPS] = merge(field[COLUMN_PROPS], pick(field, shortProps.COLUMN));
+      field[CHILDREN] = formatNormalDescriptor(field[CHILDREN]);
     }
   };
 
-  for (let item of descriptor) {
+  for (let item of localDescriptor) {
     if (isArray(item)) {
       for (let field of item) mergeProps(field);
     } else {
       mergeProps(item);
     }
   }
+
+  return localDescriptor;
 }
 
 /**
@@ -73,7 +82,7 @@ export const parseIntoRealForm = descriptor => {
   // 校验空值和参数类型
   if (isEmpty(descriptor)) return {};
 
-  formatNormalDescriptor(descriptor);
+  // const formatedDescriptor = formatNormalDescriptor(descriptor);
 
   const realForm = descriptor.reduce((form, item) => {
     // 类型区分
@@ -81,7 +90,7 @@ export const parseIntoRealForm = descriptor => {
       for (const { key, type } of item) {
         if (key && type) form[key] = parseFieldDataType(type);
       }
-    } else if (isObject(item) && hasOwn(item, KEY)) {
+    } else if (isObject(item)) {
       form[item.key] = parseFieldDataType(item.type);
     }
 
@@ -97,3 +106,20 @@ export const parseIntoRealForm = descriptor => {
  * @param {array} descriptor 表单配置描述对象
  */
 export function parseFormRules(rules, descriptor) {}
+
+/**
+ * 检出配置项的类型
+ * @param {object|array} descriptor 配置项
+ */
+export function detectDescriptorType(descriptor) {
+  if (isArray(descriptor)) {
+    return 'array';
+  } else if (isObject(descriptor) && hasOwn(descriptor, configurableProps.KEY)) {
+    return 'key';
+  } else if (isObject(descriptor) && hasOwn(descriptor, configurableProps.CHILDREN)) {
+    return 'children';
+  } else {
+    return undefined;
+  }
+}
+

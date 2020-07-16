@@ -2,7 +2,7 @@
 import fieldMixin from './fieldMixin';
 
 export default {
-  name: 'FieldSelect',
+  name: 'FieldRadio',
   mixins: [fieldMixin],
 
   render(h) {
@@ -10,11 +10,13 @@ export default {
     const { [KEY]: key, [FIELD_PROPS]: fieldProps } = field;
 
     return (
-      <el-select value={value} props={fieldProps} style={{ width: '100%' }} onInput={emitInput}>
+      <el-radio-group value={value} props={fieldProps} onInput={emitInput}>
         {options.map(option => (
-          <el-option key={option.value} props={option} />
+          <el-radio key={option.value} label={option.vaule}>
+            {option.label}
+          </el-radio>
         ))}
-      </el-select>
+      </el-radio-group>
     );
   },
 };

@@ -2,7 +2,7 @@
 import fieldMixin from './fieldMixin';
 
 export default {
-  name: 'FieldSelect',
+  name: 'FieldCheckbox',
   mixins: [fieldMixin],
 
   render(h) {
@@ -10,11 +10,13 @@ export default {
     const { [KEY]: key, [FIELD_PROPS]: fieldProps } = field;
 
     return (
-      <el-select value={value} props={fieldProps} style={{ width: '100%' }} onInput={emitInput}>
+      <el-checkbox-group value={value} props={fieldProps} onInput={emitInput}>
         {options.map(option => (
-          <el-option key={option.value} props={option} />
+          <el-checkbox key={option.value} label={option.value} props={fieldProps}>
+            {option.label}
+          </el-checkbox>
         ))}
-      </el-select>
+      </el-checkbox-group>
     );
   },
 };

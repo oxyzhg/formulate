@@ -16,6 +16,9 @@ export const configurableProps = {
 
   // 配置项中列组件参数集键值（仅在数组项中有效）
   COLUMN_PROPS: 'columnProps',
+
+  // 支持布局的子配置项
+  CHILDREN: 'children',
 };
 
 // 可选项键名
@@ -24,11 +27,17 @@ export const optionProps = {
   VALUE: 'value',
 };
 
-// 表单组件可简写属性
-export const shortProps = ['label', 'required'];
+// 可简写属性
+export const shortProps = {
+  // 表单组件
+  FORM: ['label', 'required'],
 
-// 表单项可简写属性
-export const fieldShortProps = ['disabled', 'placeholder'];
+  // 表单项
+  FILED: ['disabled', 'placeholder'],
+
+  // 布局列
+  COLUMN: ['span', 'offset'],
+};
 
 // 防抖时间间隔
 export const debounceDelay = 500;

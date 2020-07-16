@@ -6,9 +6,11 @@ export default {
   mixins: [fieldMixin],
 
   render(h) {
-    const { value, form, fieldKey, fieldProps, emitInput } = this;
+    const { value, form, field, emitInput, KEY, FIELD_PROPS } = this;
+    const { [KEY]: key, [FIELD_PROPS]: fieldProps } = field;
+    const { placeholder } = fieldProps;
 
-    return <el-input value={value} placeholder="请输入" {...fieldProps} onInput={emitInput} />;
+    return <el-input value={value} props={fieldProps} placeholder={placeholder} onInput={emitInput} />;
   },
 };
 </script>

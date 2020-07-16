@@ -13,21 +13,46 @@ export default {
       form: {
         name: '',
         region: '',
-        delivery: '',
+        date: '',
+        delivery: true,
         type: [],
         resource: '',
         desc: '',
+        col_3: '',
+        col_4: '',
+        col_5: '',
       },
       descriptor: [
         {
           key: 'name',
           type: 'input',
           label: '活动名称',
+          placeholder: '请输入活动名称',
         },
+        [
+          {
+            key: 'region',
+            type: 'select',
+            label: '活动区域',
+            span: 10,
+            placeholder: '请选择活动区域',
+            columnProps: {
+              class: 'form-item region',
+            },
+          },
+          {
+            key: 'range',
+            type: 'input',
+            label: '活动范围',
+            placeholder: '请选择活动范围',
+            disabled: true,
+            span: 14,
+          },
+        ],
         {
-          key: 'region',
-          input: 'select',
-          label: '活动区域',
+          key: 'date',
+          type: 'datepicker',
+          label: '活动日期',
         },
         {
           key: 'delivery',
@@ -48,6 +73,44 @@ export default {
           key: 'desc',
           type: 'textarea',
           label: '活动形式',
+        },
+        [
+          {
+            span: 16,
+            children: [
+              {
+                key: 'col_2',
+                type: 'input',
+                label: 'COL-2',
+              },
+            ],
+          },
+          {
+            span: 8,
+            children: [
+              {
+                key: 'col_3',
+                type: 'input',
+                label: 'COL-3',
+              },
+            ],
+          },
+        ],
+        {
+          flex: true,
+          span: 16,
+          children: [
+            {
+              key: 'col_4',
+              type: 'input',
+              label: 'COL-4',
+            },
+            {
+              key: 'col_5',
+              type: 'input',
+              label: 'COL-5',
+            },
+          ],
         },
       ],
       rules: {},

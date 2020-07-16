@@ -3,7 +3,16 @@
     <h2>Formulate!</h2>
 
     <el-form ref="form" :model="form" label-width="80px">
-      <field-builder :field="descriptor[0]" :form.sync="form" :options="options" :errors="errors"></field-builder>
+      <field-builder
+        v-for="(item, index) in formatedDescriptor"
+        :key="index"
+        :field="item"
+        :form="form"
+        :options="options"
+        :errors="errors"
+      />
+
+      <hr />
 
       <el-form-item label="活动名称">
         <el-input v-model="form.name"></el-input>
@@ -40,7 +49,8 @@
 
 <script>
 import config from './common/config';
-import { parseIntoRealForm, assignForm } from './common/utils';
+import { parseIntoRealForm, assignForm, formatNormalDescriptor } from './common/utils';
+import { configurableProps } from './common/constant';
 import { looseEqual } from './shared';
 import FieldBuilder from './fieldBuilder';
 
@@ -73,6 +83,19 @@ export default {
       type: Object,
       default: _ => ({}),
     },
+    showActions: Boolean,
+    confirmBtnText: {
+      type: String,
+      default: '确定',
+    },
+  },
+
+  provide() {
+    return {
+      rules: this.rules,
+      options: this.options,
+      errors: this.errors,
+    };
   },
 
   data() {
@@ -81,6 +104,9 @@ export default {
       errors: {},
 
       config,
+      ...configurableProps,
+
+      formatedDescriptor: [],
     };
   },
 
@@ -106,12 +132,19 @@ export default {
   methods: {
     init() {
       // init form
-      const generatedForm = parseIntoRealForm(this.descriptor);
+      console.log('init form');
+
+      const formatedDescriptor = formatNormalDescriptor(this.descriptor);
+      const generatedForm = parseIntoRealForm(formatedDescriptor);
       const mergedForm = assignForm(this.value, generatedForm);
 
       this.form = mergedForm;
       this.formKeys = Object.keys(mergedForm);
+      this.formatedDescriptor = formatedDescriptor;
     },
+
+    initDescriptor() {},
+    initForm() {},
   },
 };
 </script>

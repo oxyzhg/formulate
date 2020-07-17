@@ -43,7 +43,7 @@ export function parseFieldDataType(type) {
 
 /**
  * 生成标准格式表单配置描述对象
- * @param {object} descriptor 表单配置描述对象
+ * @param {array} descriptor 表单配置描述对象
  */
 export function formatNormalDescriptor(descriptor) {
   // 校验空值和参数类型
@@ -78,7 +78,7 @@ export function formatNormalDescriptor(descriptor) {
  * 解析真实表单项及对应值
  * @param {object} descriptor 表单配置描述对象
  */
-export const parseIntoRealForm = descriptor => {
+export function parseIntoRealForm(descriptor) {
   // 校验空值和参数类型
   if (isEmpty(descriptor)) return {};
 
@@ -98,7 +98,7 @@ export const parseIntoRealForm = descriptor => {
   }, {});
 
   return realForm;
-};
+}
 
 /**
  * 生成表单校验规则
@@ -122,4 +122,3 @@ export function detectDescriptorType(descriptor) {
     return undefined;
   }
 }
-

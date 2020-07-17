@@ -8,8 +8,9 @@ export default {
 
   methods: {
     emitInput(value) {
-      const ret = moment(value).format('YYYY-MM-DD');
-      this.$emit('input', ret);
+      let date = moment(value);
+      date = date.isValid() ? date.format('YYYY-MM-DD') : '';
+      this.$emit('input', date);
     },
   },
 

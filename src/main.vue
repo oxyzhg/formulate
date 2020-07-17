@@ -3,14 +3,7 @@
     <h2>Formulate!</h2>
 
     <el-form ref="form" :model="form" label-width="80px">
-      <field-builder
-        v-for="(item, index) in formatedDescriptor"
-        :key="index"
-        :field="item"
-        :form="form"
-        :options="options"
-        :errors="errors"
-      />
+      <field-builder v-for="(item, index) in formatedDescriptor" :key="index" :field="item" />
 
       <hr />
 
@@ -92,6 +85,7 @@ export default {
 
   provide() {
     return {
+      form: this.form,
       rules: this.rules,
       options: this.options,
       errors: this.errors,

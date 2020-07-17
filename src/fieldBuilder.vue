@@ -29,9 +29,15 @@ export default {
 
   props: {
     field: [Object, Array], // 支持两种类型，三种模式
-    options: Object,
-    form: Object,
-    errors: Object,
+    // options: Object,
+    // form: Object,
+    // errors: Object,
+  },
+
+  inject: {
+    form: 'form',
+    options: 'options',
+    errors: 'errors',
   },
 
   methods: {
@@ -113,14 +119,14 @@ export default {
     ) : descriptorType === 'children' ? (
       <el-row>
         {field.children.map(item => (
-          <el-col key={item.key}>{formItemRender(item)}</el-col>
+          <field-builder field={item} />
         ))}
       </el-row>
     ) : descriptorType === 'array' ? (
       <el-row type="flex">
         {field.map(item => (
           <el-col props={item[COLUMN_PROPS]} class={item[COLUMN_PROPS].class}>
-            {formItemRender(item)}
+            <field-builder field={item} />
           </el-col>
         ))}
       </el-row>

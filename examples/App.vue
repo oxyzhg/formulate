@@ -18,6 +18,8 @@ export default {
         type: [],
         resource: '',
         desc: '',
+        col_1: '',
+        col_2: '',
         col_3: '',
         col_4: '',
         col_5: '',

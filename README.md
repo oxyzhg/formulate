@@ -31,5 +31,15 @@
 | required      | formItemProps.required 简写形式                     | boolean       | 否       |
 | disabled      | fieldProps.disabled 简写形式                        | boolean       | 否       |
 | placeholder   | fieldProps.placeholder 简写形式                     | string        | 否       |
+| span          | columnProps.span 简写形式                           | string        | 否       |
+| offset        | columnProps.offset 简写形式                         | string        | 否       |
+| class         | columnProps.class 简写形式                          | string        | 否       |
+| style         | columnProps.style 简写形式                          | string        | 否       |
 | width         | 表单宽度，数组类型配置请使用 `gs-ui/layout` 布局    | string/number | 否       |
-| on            | 表单项的事件                                        | function      | 否       |
+| on            | 表单项的事件（适配性不太好）                        | function      | 否       |
+
+## 布局
+
+Formulate 组件支持配置项布局，布局基于 Element 栅格布局，`el-row` 默认使用 flex 属性，与 `el-col` 相关的属性可以使用 `columnProps` 配置项属性传入，组件会自动适配样式。
+
+目前暂不支持引入自定义的配置，后续会考虑启用相关的功能与配置。

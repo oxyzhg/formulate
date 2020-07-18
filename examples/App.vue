@@ -79,7 +79,13 @@ export default {
         [
           {
             span: 16,
+            class: 'custom-column',
             children: [
+              {
+                key: 'col_1',
+                type: 'input',
+                label: 'COL-1',
+              },
               {
                 key: 'col_2',
                 type: 'input',
@@ -89,6 +95,8 @@ export default {
           },
           {
             span: 8,
+            class: 'custom-column',
+            style: 'margin-left:24px;margin-top: 16px;',
             children: [
               {
                 key: 'col_3',
@@ -142,5 +150,11 @@ export default {
   display: flex;
   flex-flow: row nowrap;
   justify-content: center;
+
+  .custom-column {
+    background: ivory;
+    border: 1px solid #eee;
+    padding: 24px;
+  }
 }
 </style>

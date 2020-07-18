@@ -1,4 +1,8 @@
 .formulate {
   width: 60%;
   background: #fff;
+
+  .el-row {
+    align-items: flex-start;
+  }
 }

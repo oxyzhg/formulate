@@ -12,7 +12,7 @@ export default {
     return (
       <el-radio-group value={value} props={fieldProps} onInput={emitInput}>
         {options.map(option => (
-          <el-radio key={option.value} label={option.vaule}>
+          <el-radio key={option.value} props={{ label: option.value }}>
             {option.label}
           </el-radio>
         ))}

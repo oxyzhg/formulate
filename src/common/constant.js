@@ -36,7 +36,7 @@ export const shortProps = {
   FILED: ['disabled', 'placeholder'],
 
   // 布局列
-  COLUMN: ['span', 'offset'],
+  COLUMN: ['span', 'offset', 'class', 'style'],
 };
 
 // 防抖时间间隔

@@ -125,7 +125,7 @@ export default {
     ) : descriptorType === 'array' ? (
       <el-row type="flex">
         {field.map(item => (
-          <el-col props={item[COLUMN_PROPS]} class={item[COLUMN_PROPS].class}>
+          <el-col props={item[COLUMN_PROPS]} class={item[COLUMN_PROPS].class} style={item[COLUMN_PROPS].style}>
             <field-builder field={item} />
           </el-col>
         ))}

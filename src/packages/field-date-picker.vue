@@ -23,7 +23,7 @@ export default {
 
     const realValue = format2date(value);
 
-    return <el-date-picker value={realValue} props={fieldProps} onInput={emitInput} />;
+    return <el-date-picker value={realValue} props={fieldProps} style={{ width: '100%' }} onInput={emitInput} />;
   },
 };
 </script>

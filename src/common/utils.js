@@ -43,13 +43,13 @@ export function parseFieldDataType(type) {
 
 /**
  * 生成标准格式表单配置描述对象
- * @param {array} descriptor 表单配置描述对象
+ * @param {array} schema 表单配置描述对象
  */
-export function formatNormalDescriptor(descriptor) {
+export function formatNormalSchema(schema) {
   // 校验空值和参数类型
-  if (isEmpty(descriptor)) return {};
+  if (isEmpty(schema)) return {};
 
-  const localDescriptor = cloneDeep(descriptor);
+  const localSchema = cloneDeep(schema);
 
   const mergeProps = field => {
     // 存在 KEY 即认为是表单项，否则考虑是否为布局项
@@ -59,11 +59,11 @@ export function formatNormalDescriptor(descriptor) {
       field[COLUMN_PROPS] = merge(field[COLUMN_PROPS], pick(field, shortProps.COLUMN));
     } else if (isObject(field) && hasOwn(field, CHILDREN)) {
       field[COLUMN_PROPS] = merge(field[COLUMN_PROPS], pick(field, shortProps.COLUMN));
-      field[CHILDREN] = formatNormalDescriptor(field[CHILDREN]);
+      field[CHILDREN] = formatNormalSchema(field[CHILDREN]);
     }
   };
 
-  for (let item of localDescriptor) {
+  for (let item of localSchema) {
     if (isArray(item)) {
       for (let field of item) mergeProps(field);
     } else {
@@ -71,20 +71,20 @@ export function formatNormalDescriptor(descriptor) {
     }
   }
 
-  return localDescriptor;
+  return localSchema;
 }
 
 /**
  * 解析真实表单项及对应值
- * @param {object} descriptor 表单配置描述对象
+ * @param {object} schema 表单配置描述对象
  */
-export function parseIntoRealForm(descriptor) {
+export function parseIntoRealForm(schema) {
   // 校验空值和参数类型
-  if (isEmpty(descriptor)) return {};
+  if (isEmpty(schema)) return {};
 
-  // const formatedDescriptor = formatNormalDescriptor(descriptor);
+  // const formatedSchema = formatNormalSchema(schema);
 
-  const realForm = descriptor.reduce((form, item) => {
+  const realForm = schema.reduce((form, item) => {
     // 类型区分
     if (isArray(item)) {
       for (const { key, type } of item) {
@@ -103,20 +103,20 @@ export function parseIntoRealForm(descriptor) {
 /**
  * 生成表单校验规则
  * @param {object} rules 用户定义的表单校验规则
- * @param {array} descriptor 表单配置描述对象
+ * @param {array} schema 表单配置描述对象
  */
-export function parseFormRules(rules, descriptor) {}
+export function parseFormRules(rules, schema) {}
 
 /**
  * 检出配置项的类型
- * @param {object|array} descriptor 配置项
+ * @param {object|array} schema 配置项
  */
-export function detectDescriptorType(descriptor) {
-  if (isArray(descriptor)) {
+export function detectSchemaType(schema) {
+  if (isArray(schema)) {
     return 'array';
-  } else if (isObject(descriptor) && hasOwn(descriptor, configurableProps.KEY)) {
+  } else if (isObject(schema) && hasOwn(schema, KEY)) {
     return 'key';
-  } else if (isObject(descriptor) && hasOwn(descriptor, configurableProps.CHILDREN)) {
+  } else if (isObject(schema) && hasOwn(schema, CHILDREN)) {
     return 'children';
   } else {
     return undefined;

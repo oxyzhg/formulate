@@ -1,7 +1,7 @@
 <script>
 import components from './common/components';
 import { configurableProps } from './common/constant';
-import { detectDescriptorType } from './common/utils';
+import { detectSchemaType } from './common/utils';
 import { isArray, isObject, hasOwn } from './shared';
 
 import FieldInput from './packages/field-input';
@@ -80,7 +80,7 @@ export default {
     // 1.表单项，直接渲染，判断条件：存在 key
     // 2.表单项组，按照配置布局后，遍历渲染 children 各项，判断条件：存在 children
     // 3.表单项列，遍历渲染各项，判断条件：数组形式
-    const descriptorType = detectDescriptorType(field); // 配置项的类型
+    const schemaType = detectSchemaType(field); // 配置项的类型
 
     // 表单项渲染，一定是具体的表单项
     const formItemRender = config => {
@@ -114,15 +114,15 @@ export default {
       return h('ElFormItem', formItemProps, [componentName && h(componentName, fieldProps)].filter(Boolean));
     };
 
-    return descriptorType === 'key' ? (
+    return schemaType === 'key' ? (
       formItemRender(field)
-    ) : descriptorType === 'children' ? (
+    ) : schemaType === 'children' ? (
       <el-row>
         {field.children.map(item => (
           <field-builder field={item} />
         ))}
       </el-row>
-    ) : descriptorType === 'array' ? (
+    ) : schemaType === 'array' ? (
       <el-row type="flex">
         {field.map(item => (
           <el-col props={item[COLUMN_PROPS]} class={item[COLUMN_PROPS].class} style={item[COLUMN_PROPS].style}>

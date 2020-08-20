@@ -9,7 +9,7 @@
 | 参数          | 说明                                              | 类型    | 是否必填 |
 | ------------- | ------------------------------------------------- | ------- | -------: |
 | value         | 支持双向绑定的表单值，即 `form`                   | object  |       是 |
-| descriptor    | 定义表单项的配置列表，子项类型可以是 array/object | array   |       是 |
+| schema    | 定义表单项的配置列表，子项类型可以是 array/object | array   |       是 |
 | options       | 列表类表单的可选项，以 key 为唯一索引             | object  |       否 |
 | rules         | 表单项的校验规则，以 key 为唯一索引               | object  |       否 |
 | asyncErrors   | 异步校验错误信息，即用户可自定义错误信息          | object  |       否 |
@@ -17,7 +17,7 @@
 | showActions   | 是否显示表单按钮组，若是能触发 submit 事件        | boolean |       否 |
 | submitBtnText | 表单按钮组确定按钮的文本内容                      | string  |       否 |
 
-#### Descriptor Item options
+#### Schema Item options
 
 | 参数          | 说明                                                | 类型          | 是否必填 |
 | ------------- | --------------------------------------------------- | ------------- | -------- |
@@ -25,7 +25,7 @@
 | type          | 表单项类型                                          | string        | 是       |
 | fieldProps    | 组件实例配置                                        | object        | 否       |
 | formItemProps | `form-item` 组件配置                                | object        | 否       |
-| columnProps   | 仅在 descriptor 子项为数组时，`column` 配置列的参数 | object        | 否       |
+| columnProps   | 仅在 schema 子项为数组时，`column` 配置列的参数 | object        | 否       |
 | children      | 支持布局的子项                                      | array         | 否       |
 | label         | formItemProps.label 简写形式                        | string        | 否       |
 | required      | formItemProps.required 简写形式                     | boolean       | 否       |

@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <formulate v-model="form" :descriptor="descriptor" :rules="rules" :options="options"></formulate>
+    <formulate v-model="form" :schema="schema" :rules="rules" :options="options"></formulate>
   </div>
 </template>
 
@@ -24,7 +24,7 @@ export default {
         col_4: '',
         col_5: '',
       },
-      descriptor: [
+      schema: [
         {
           key: 'name',
           type: 'input',

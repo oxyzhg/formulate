@@ -1,4 +1,5 @@
-import { isObject, isArray } from './index';
+import moment from 'moment';
+import { isObject, isArray } from './util';
 
 /**
  * 将 Map 转换成键值对形式的对象
@@ -71,4 +72,24 @@ export function format2switcher(source, patterns) {
   }
 
   return [];
+}
+
+/**
+ * 将字符创转换成 moment 日期
+ * @param {string} value 日期字符串
+ * @param {string} formatter 日期格式
+ */
+export function format2date(value, formatter = 'YYYY-MM-DD') {
+  const date = moment(value);
+  return date.isValid() ? date : '';
+}
+
+/**
+ * 将日期转换成字符串
+ * @param {string} value 日期字符串
+ * @param {string} formatter 日期格式
+ */
+export function parseMoment(value, formatter = 'YYYY-MM-DD') {
+  const date = moment(value);
+  return date.isValid() ? date.format(formatter) : '';
 }

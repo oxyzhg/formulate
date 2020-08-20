@@ -38,6 +38,7 @@ export default {
     form: 'form',
     options: 'options',
     errors: 'errors',
+    getScopedSlots: 'getScopedSlots',
   },
 
   methods: {
@@ -73,7 +74,7 @@ export default {
   },
 
   render(h) {
-    const { $slots, field, form, options, errors, detectComponent, updateFormItem } = this;
+    const { $slots, field, form, options, errors, getScopedSlots, detectComponent, updateFormItem } = this;
     const { FORMITEM_PROPS, FIELD_PROPS, COLUMN_PROPS } = configurableProps;
 
     // 判断表单项、表单组、表单列，根据情况渲染
@@ -88,6 +89,8 @@ export default {
       const _value = form[key];
       const _options = options[key] || args.options || [];
       const _errors = errors[key];
+      // get scoped slot
+      const { [key]: scopedSlot } = getScopedSlots();
 
       const componentName = detectComponent(type);
 
@@ -111,7 +114,13 @@ export default {
         },
       };
 
-      return h('ElFormItem', formItemProps, [componentName && h(componentName, fieldProps)].filter(Boolean));
+      const renderTag = type === 'empty' || type === 'preview' ? 'div' : 'ElFormItem';
+
+      return h(
+        renderTag,
+        formItemProps,
+        [scopedSlot ? scopedSlot(fieldProps.props) : componentName && h(componentName, fieldProps)].filter(Boolean)
+      );
     };
 
     return schemaType === 'key' ? (

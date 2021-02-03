@@ -1,6 +1,6 @@
 # Formulate
 
-:rocket: Automatic form builder.
+:rocket: Automatic form builder based on vue3.
 
 ## 配置参数
 

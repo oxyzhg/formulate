@@ -1,36 +1,23 @@
 {
   "name": "formulate",
-  "version": "0.1.0",
-  "description": "Automatic form builder.",
+  "version": "0.2.0",
+  "description": "Automatic form builder based on vue3",
   "main": "src/index.js",
   "scripts": {
-    "serve": "vue-cli-service serve",
-    "build": "vue-cli-service build",
-    "commit": "git-cz"
+    "dev": "vite",
+    "build": "vite build"
   },
   "dependencies": {
-    "@dotlim/eslint-config": "^0.1.0",
-    "core-js": "^3.6.5",
-    "element-ui": "^2.13.2",
-    "lodash": "^4.17.15",
-    "lodash-es": "^4.17.15",
-    "moment": "^2.27.0",
-    "vue": "^2.6.11"
+    "vue": "^3.0.5"
   },
   "devDependencies": {
-    "@vue/cli-plugin-babel": "^4.4.6",
-    "@vue/cli-service": "^4.4.6",
-    "cz-conventional-changelog": "^3.2.0",
-    "eslint": "^7.3.1",
-    "eslint-config-airbnb-base": "^14.2.0",
-    "node-sass": "^4.14.1",
-    "sass-loader": "^8.0.2",
-    "vue-template-compiler": "^2.6.11"
-  },
-  "config": {
-    "commitizen": {
-      "path": "node_modules/cz-conventional-changelog"
-    }
+    "@dotlim/fabric": "^1.0.0",
+    "@vitejs/plugin-vue": "^1.1.4",
+    "@vitejs/plugin-vue-jsx": "^1.0.2",
+    "@vue/compiler-sfc": "3.0.4",
+    "eslint": "^7.19.0",
+    "prettier": "^2.2.1",
+    "vite": "^2.0.0-beta.64"
   },
   "repository": {
     "type": "git",
@@ -38,8 +25,7 @@
   },
   "keywords": [
     "form",
-    "formulate",
-    "formulation"
+    "form-generator"
   ],
   "author": "oxyzhg@163.com",
   "license": "MIT",

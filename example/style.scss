@@ -1,0 +1,11 @@
+#app {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: center;
+
+  .custom-column {
+    background: ivory;
+    border: 1px solid #eee;
+    padding: 24px;
+  }
+}
